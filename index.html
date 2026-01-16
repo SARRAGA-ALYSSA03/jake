@@ -1,164 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Harold Jake Patindol | IT Profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile</title>
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+/* ===== VARIABLES ===== */
+:root {
+    --bg-gradient: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    --card-bg: #ffffff;
+    --text-main: #4a4a4a;
+    --text-sub: #8d99ae;
+    --accent: #cdb4db;
+    --soft-box: #f8f9ff;
+}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0f172a;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #e5e7eb;
-      padding: 20px;
-    }
+/* ===== DARK MODE ===== */
+body.dark {
+    --bg-gradient: linear-gradient(135deg, #2b2d42, #3a3d5c);
+    --card-bg: #2f3147;
+    --text-main: #f1f1f1;
+    --text-sub: #cfcfe8;
+    --accent: #ffc8dd;
+    --soft-box: #3c3f5c;
+}
 
-    /* ===== CARD ===== */
-    .card {
-      background-color: #020617;
-      width: 100%;
-      max-width: 380px;
-      padding: 32px 24px;
-      border-radius: 18px;
-      text-align: center;
-      border: 1px solid #1e293b;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
+/* ===== BODY ===== */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.4s;
+}
 
-    /* ===== PROFILE IMAGE ===== */
-    .profile-img {
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 16px;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 2px solid #3b82f6;
-    }
+/* ===== RETRO LOADING SCREEN ===== */
+.loading {
+    position: fixed;
+    inset: 0;
+    background: #1b1b2f;
+    color: #fff;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: hideLoader 2.5s forwards;
+}
 
-    .profile-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.loading-box {
+    text-align: center;
+}
 
-    h1 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
+.loading-bar {
+    width: 200px;
+    height: 14px;
+    border: 2px solid #fff;
+    margin-top: 10px;
+    position: relative;
+}
 
-    .role {
-      font-size: 13px;
-      color: #94a3b8;
-      margin-bottom: 18px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+.loading-fill {
+    height: 100%;
+    width: 0;
+    background: #fbc2eb;
+    animation: load 2s forwards;
+}
 
-    /* ===== ABOUT ===== */
-    .about {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #cbd5f5;
-      margin-bottom: 22px;
-    }
+@keyframes load {
+    to { width: 100%; }
+}
 
-    /* ===== SKILLS ===== */
-    .skills {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
+@keyframes hideLoader {
+    90% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
 
-    .skill {
-      font-size: 12px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      background-color: #1e293b;
-      color: #93c5fd;
-    }
+/* ===== ANIMATIONS ===== */
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
 
-    /* ===== SOCIAL LINKS ===== */
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      margin-top: 10px;
-    }
+@keyframes sparkle {
+    0%,100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1); }
+}
 
-    .socials a {
-      color: #cbd5e1;
-      font-size: 20px;
-      transition: color 0.3s ease;
-    }
+@keyframes cloudMove {
+    0% { transform: translateX(-30px); }
+    50% { transform: translateX(30px); }
+    100% { transform: translateX(-30px); }
+}
 
-    .socials a:hover {
-      color: #3b82f6;
-    }
+/* ===== CLOUDS ===== */
+.cloud {
+    position: absolute;
+    font-size: 42px;
+    opacity: 0.35;
+    animation: cloudMove 10s ease-in-out infinite;
+}
 
-    footer {
-      margin-top: 20px;
-      font-size: 11px;
-      color: #64748b;
-    }
-  </style>
+.c1 { top: 5%; left: 5%; }
+.c2 { top: 15%; right: 10%; animation-delay: 2s; }
+.c3 { top: 30%; left: 15%; animation-delay: 4s; }
+.c4 { bottom: 30%; right: 12%; animation-delay: 6s; }
+.c5 { bottom: 15%; left: 8%; animation-delay: 8s; }
+.c6 { bottom: 5%; right: 5%; animation-delay: 10s; }
+
+/* ===== PIXEL STARS ===== */
+.pixel-star {
+    position: absolute;
+    font-size: 12px;
+    font-family: monospace;
+    animation: sparkle 3s infinite;
+}
+
+.ps1 { top: 8%; left: 25%; }
+.ps2 { top: 12%; right: 22%; animation-delay: 1s; }
+.ps3 { top: 40%; left: 10%; animation-delay: 2s; }
+.ps4 { top: 45%; right: 15%; animation-delay: 1.5s; }
+.ps5 { bottom: 25%; left: 18%; animation-delay: 0.5s; }
+.ps6 { bottom: 18%; right: 20%; animation-delay: 2.5s; }
+.ps7 { bottom: 10%; left: 35%; animation-delay: 1.8s; }
+
+/* ===== PROFILE CARD ===== */
+.profile-card {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 36px;
+    text-align: center;
+    box-shadow: 0 22px 40px rgba(0,0,0,0.18);
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+    z-index: 5;
+}
+
+.profile-card::before {
+    content: "💗";
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 26px;
+}
+
+.profile-card::after {
+    content: "🎮";
+    position: absolute;
+    bottom: -12px;
+    right: -12px;
+    font-size: 26px;
+}
+
+/* ===== IMAGE ===== */
+.profile-card img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 4px solid var(--accent);
+    object-fit: cover;
+}
+
+/* ===== TEXT ===== */
+h1 { font-size: 22px; color: var(--text-main); }
+.title { font-size: 14px; color: var(--text-sub); }
+.gamer-tag { font-size: 13px; color: var(--accent); margin: 10px 0; }
+
+.bio {
+    font-size: 14px;
+    color: var(--text-main);
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+/* ===== INFO ===== */
+.info {
+    background: var(--soft-box);
+    border-radius: 18px;
+    padding: 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.info i {
+    color: var(--accent);
+    margin-right: 8px;
+}
+
+/* ===== SOCIAL ===== */
+.social-links a {
+    width: 44px;
+    height: 44px;
+    margin: 0 8px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.facebook { background: #bde0fe; }
+.instagram { background: linear-gradient(45deg, #feda75, #d62976, #962fbf); }
+.tiktok { background: #cdb4db; }
+
+.social-links a:hover {
+    transform: scale(1.2) rotate(12deg);
+}
+
+/* ===== DARK MODE BUTTON ===== */
+.toggle {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    border: none;
+    background: var(--soft-box);
+    border-radius: 20px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text-sub);
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card">
-    <div class="profile-img">
-      <!-- Replace with your own photo -->
-      <img src="https://via.placeholder.com/300" alt="Profile Picture">
+<!-- LOADING SCREEN -->
+<div class="loading">
+    <div class="loading-box">
+        <div>Loading Profile...</div>
+        <div class="loading-bar">
+            <div class="loading-fill"></div>
+        </div>
+    </div>
+</div>
+
+<!-- CLOUDS -->
+<div class="cloud c1">☁️</div>
+<div class="cloud c2">☁️</div>
+<div class="cloud c3">☁️</div>
+<div class="cloud c4">☁️</div>
+<div class="cloud c5">☁️</div>
+<div class="cloud c6">☁️</div>
+
+<!-- PIXEL STARS -->
+<div class="pixel-star ps1">✦</div>
+<div class="pixel-star ps2">✧</div>
+<div class="pixel-star ps3">✦</div>
+<div class="pixel-star ps4">✧</div>
+<div class="pixel-star ps5">✦</div>
+<div class="pixel-star ps6">✧</div>
+<div class="pixel-star ps7">✦</div>
+
+<div class="profile-card">
+    <button class="toggle" onclick="document.body.classList.toggle('dark')">🌙</button>
+
+    <img src="profile.jpg">
+    <h1>Alyssa R. Sarraga</h1>
+    <div class="title">BS Information Technology</div>
+    <div class="gamer-tag">🎮 Gamer • Designer • Coder</div>
+
+    <div class="bio">
+        I love kawaii pixel designs, gaming, and building fun
+        web projects while learning new technologies ⭐☁️
     </div>
 
-    <h1>Harold Jake Patindol</h1>
-    <div class="role">IT Student</div>
-
-    <p class="about">
-      A motivated Information Technology student with an interest in web development,
-      system design, and modern technologies. Passionate about learning and improving
-      technical skills.
-    </p>
-
-    <div class="skills">
-      <span class="skill">HTML</span>
-      <span class="skill">CSS</span>
-      <span class="skill">JavaScript</span>
-      <span class="skill">Networking</span>
+    <div class="info">
+        <p><i class="fas fa-graduation-cap"></i> BS Information Technology</p>
+        <p><i class="fas fa-code"></i> HTML, CSS, JavaScript</p>
+        <p><i class="fas fa-gamepad"></i> Gaming & UI Design</p>
     </div>
 
-    <div class="socials">
-      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-        <i class="fa-brands fa-facebook"></i>
-      </a>
-      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-        <i class="fa-brands fa-instagram"></i>
-      </a>
+    <div class="social-links">
+        <a href="https://facebook.com/alyssarsarraga" class="facebook" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com/prsia_" class="instagram" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://tiktok.com/@persiaqq" class="tiktok" target="_blank">
+            <i class="fab fa-tiktok"></i>
+        </a>
     </div>
 
-    <footer>
-      © 2026 • Personal Profile Page
-    </footer>
-  </div>
+    <div class="footer">© 2026 Alyssa R. Sarraga 💗</div>
+</div>
 
 </body>
 </html>
